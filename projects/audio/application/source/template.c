@@ -60,7 +60,7 @@ int main(int argc, char **argv) {
 
 	printf("Playing sample MP3 file...Press HOME to exit.\n");
 
-	MP3Player_PlayBuffer(sample_mp3, sample_mp3_size, NULL);
+	MP3Player_PlayBuffer(webtv_mp3, webtv_mp3_size, NULL);
 
 	while(1) {
 
