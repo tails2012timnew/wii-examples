@@ -1,0 +1,19 @@
+00:00:000 rend/dx11/dx11context.cpp:42 N[RENDERER]: DX11 Context initializing
+00:00:034 sdl/sdl.cpp:706 N[RENDERER]: Monitor refresh rate: 60 Hz (1920 x 1080)
+00:00:228 rend/dx11/dx11context.cpp:178 N[RENDERER]: No system-provided shader cache
+00:00:230 rend/gui.cpp:303 N[RENDERER]: Screen DPI is 96, size 726 x 434. Scaling by 1.00
+00:00:232 rend/dx11/dx11context.cpp:322 N[RENDERER]: Swapchain resized: 726 x 434
+00:00:280 rend/dx11/dx11_shaders.cpp:781 N[RENDERER]: Loaded 25 shaders from E:\heiro\Downloads\flycast-win64-2.3\data\dx11_shader_cache.bin
+00:00:281 rend/dx11/dx11context.cpp:404 W[RENDERER]: Format B4G4R4A4 doesn't support mipmap autogen
+00:00:317 rend/dx11/dx11_renderer.cpp:46 N[RENDERER]: DX11 renderer initializing
+00:00:321 hw/mem/addrspace.cpp:431 N[VMEM]: Info: nvmem is enabled
+00:00:344 hw/mem/addrspace.cpp:463 N[VMEM]: BASE 00007ff43a1b0000 RAM(32 MB) 00007ff4461b0000 VRAM64(8 MB) 00007ff43e1b0000 ARAM(2 MB) 00007ff45a1b0000
+00:00:357 hw/mem/addrspace.cpp:431 N[VMEM]: Info: nvmem is enabled
+00:00:378 hw/mem/addrspace.cpp:463 N[VMEM]: BASE 00007ff43a1b0000 RAM(32 MB) 00007ff4461b0000 VRAM64(8 MB) 00007ff43e1b0000 ARAM(2 MB) 00007ff45a1b0000
+00:00:487 reios/reios.cpp:622 N[REIOS]: -----------------
+00:00:487 reios/reios.cpp:623 N[REIOS]: REIOS: Booting up
+00:00:487 reios/reios.cpp:624 N[REIOS]: -----------------
+00:00:550 rend/gui.cpp:549 E[COMMON]: Flycast has stopped: Failed to open ELF E:\github\wii-examples\filesystem\directory\directory.elf
+00:00:550 rend/dx11/dx11_renderer.cpp:177 N[RENDERER]: DX11 renderer terminating
+00:00:571 rend/dx11/dx11context.cpp:193 N[RENDERER]: DX11 Context terminating
+00:00:572 rend/dx11/dx11_shaders.cpp:755 N[RENDERER]: Saved 25 shaders to E:\heiro\Downloads\flycast-win64-2.3\data\dx11_shader_cache.bin

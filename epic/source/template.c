@@ -1,15 +1,12 @@
-#include <gccore.h>
-#include <wiiuse/wpad.h>
-
-#include <fat.h>
-
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
-#include <dirent.h>
-#include <sys/types.h>
-#include <sys/stat.h>
-#include <unistd.h>
+#include <gccore.h>
+#include <wiiuse/wpad.h>
+#include <asndlib.h>
+#include <mp3player.h>
+
+// include generated header
+#include "sample_mp3.h"
 
 static void *xfb = NULL;
 static GXRModeObj *rmode = NULL;
@@ -21,8 +18,12 @@ int main(int argc, char **argv) {
 	// Initialise the video system
 	VIDEO_Init();
 
-	// This function initialises the attached controllers
+	// Initialise the attached controllers
 	WPAD_Init();
+
+	// Initialise the audio subsystem
+	ASND_Init();
+	MP3Player_Init();
 
 	// Obtain the preferred video mode from the system
 	// This will correspond to the settings in the Wii menu
@@ -41,7 +42,7 @@ int main(int argc, char **argv) {
 	VIDEO_SetNextFramebuffer(xfb);
 
 	// Make the display visible
-	VIDEO_SetBlack(true);
+	VIDEO_SetBlack(false);
 
 	// Flush the video register changes to the hardware
 	VIDEO_Flush();
@@ -56,35 +57,11 @@ int main(int argc, char **argv) {
 	// we can use variables for this with format codes too
 	// e.g. printf ("\x1b[%d;%dH", row, column );
 	printf("\x1b[2;0H");
-	printf("Loading...");
-	if (!fatInitDefault()) {
-		printf("fatInitDefault failure: terminating\n");
-		goto error;
-	}
 
-	DIR *pdir;
-	struct dirent *pent;
-	struct stat statbuf;
+	printf("Playing sample MP3 file...Press HOME to exit.\n");
 
-	pdir=opendir(".");
+	MP3Player_PlayBuffer(sample_mp3, sample_mp3_size, NULL);
 
-	if (!pdir){
-		printf ("opendir() failure; terminating\n");
-		goto error;
-	}
-
-	while ((pent=readdir(pdir))!=NULL) {
-		stat(pent->d_name,&statbuf);
-		if(strcmp(".", pent->d_name) == 0 || strcmp("..", pent->d_name) == 0)
-			continue;
-		if(S_ISDIR(statbuf.st_mode))
-			printf("%s <dir>\n", pent->d_name);
-		if(!(S_ISDIR(statbuf.st_mode)))
-			printf("%s %lld\n", pent->d_name, statbuf.st_size);
-	}
-	closedir(pdir);
-
-error:
 	while(1) {
 
 		// Call WPAD_ScanPads each loop, this reads the latest controller states
@@ -95,8 +72,10 @@ error:
 		u32 pressed = WPAD_ButtonsDown(0);
 
 		// We return to the launcher application via exit
-		if ( pressed & WPAD_BUTTON_HOME ) exit(0);
-
+		if ( pressed & WPAD_BUTTON_HOME ) {
+			printf("Exiting...");
+			exit(0);
+		}
 		// Wait for the next frame
 		VIDEO_WaitVSync();
 	}
